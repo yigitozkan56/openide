@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Material Design 3 Live Preview</title>
+  <style>
+    :root {
+      --primary: #6750A4;
+      --primary-container: #EADDFF;
+      --on-primary-container: #21005D;
+      --surface: #FEF7FF;
+      --surface-card: #F3EDF7;
+    }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--surface);
+      color: #1D1B20;
+      margin: 0;
+      padding: 24px;
+    }
+    .card {
+      background: var(--surface-card);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      max-width: 480px;
+    }
+    .chip {
+      display: inline-block;
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 999px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 12px;
+    }
+    button:hover { opacity: 0.9; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <span class="chip">Live Preview</span>
+    <h2>openide</h2>
+    <p>Edit this HTML file and watch the Live Preview pane on the right update in real time!</p>
+    <button onclick="document.getElementById('counter').textContent = Number(document.getElementById('counter').textContent) + 1">
+      Clicks: <span id="counter">0</span>
+    </button>
+  </div>
+</body>
+</html>

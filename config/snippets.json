@@ -1,0 +1,63 @@
+{
+  "_comment": "openide - User Code Snippets. Add custom templates for any language.",
+  "snippets": [
+    {
+      "name": "main-py",
+      "language": "python",
+      "prefix": "main",
+      "description": "Python main entry block",
+      "body": [
+        "def main():",
+        "    ${1:print('Hello from openide!')}",
+        "",
+        "if __name__ == '__main__':",
+        "    main()"
+      ]
+    },
+    {
+      "name": "fetch-async",
+      "language": "javascript",
+      "prefix": "fetchjson",
+      "description": "Async/Await JSON Fetch request",
+      "body": [
+        "async function fetchData(url) {",
+        "  try {",
+        "    const response = await fetch(url);",
+        "    const data = await response.json();",
+        "    console.log(data);",
+        "    return data;",
+        "  } catch (error) {",
+        "    console.error('Fetch error:', error);",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "name": "html5-md3",
+      "language": "html",
+      "prefix": "md3html",
+      "description": "Material Design 3 HTML5 Starter Template",
+      "body": [
+        "<!DOCTYPE html>",
+        "<html lang=\"en\">",
+        "<head>",
+        "  <meta charset=\"UTF-8\">",
+        "  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">",
+        "  <title>${1:Material 3 App}</title>",
+        "  <style>",
+        "    :root {",
+        "      --md-primary: #6750A4;",
+        "      --md-surface: #FEF7FF;",
+        "      --md-on-surface: #1D1B20;",
+        "    }",
+        "    body { font-family: system-ui, sans-serif; background: var(--md-surface); color: var(--md-on-surface); margin: 2rem; }",
+        "  </style>",
+        "</head>",
+        "<body>",
+        "  <h1>${2:Hello World}</h1>",
+        "</body>",
+        "</html>"
+      ]
+    }
+  ]
+}

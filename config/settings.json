@@ -1,0 +1,59 @@
+{
+  "$schema": "./schemas/settings.schema.json",
+  "_comment": "openide - External Configuration File (Automatically hot-reloads when edited outside the IDE)",
+  "appearance": {
+    "theme": "material-daylight-light",
+    "mode": "light",
+    "seedColor": "#000000",
+    "useDynamicSeed": true,
+    "cornerRadius": 16,
+    "uiDensity": "comfortable",
+    "sidebarPosition": "left",
+    "surfaceContrast": "standard",
+    "rippleEffect": true,
+    "animations": true,
+    "customCssEnabled": true,
+    "uiFontFamily": "'Segoe UI Variable Text', 'Inter', 'Roboto', system-ui, sans-serif",
+    "uiScale": 100,
+    "language": "en"
+  },
+  "editor": {
+    "fontFamily": "'Cascadia Code', 'JetBrains Mono', 'Fira Code', 'Consolas', monospace",
+    "fontSize": 14,
+    "lineHeight": 22,
+    "fontLigatures": true,
+    "tabSize": 2,
+    "insertSpaces": true,
+    "wordWrap": "off",
+    "minimapEnabled": true,
+    "minimapSide": "right",
+    "lineNumbers": "on",
+    "cursorStyle": "line",
+    "cursorBlinking": "smooth",
+    "cursorSmoothCaretAnimation": "on",
+    "smoothScrolling": true,
+    "bracketPairColorization": true,
+    "renderWhitespace": "selection",
+    "guidesIndentation": true,
+    "stickyScroll": true,
+    "formatOnSave": false,
+    "autoSave": "off",
+    "autoSaveDelay": 1500
+  },
+  "terminal": {
+    "defaultShell": "powershell.exe",
+    "fontSize": 13,
+    "fontFamily": "'Cascadia Mono', 'Consolas', monospace",
+    "scrollback": 2000,
+    "clearOnRun": false
+  },
+  "plugins": {
+    "enabledPlugins": [
+      "todo-tracker",
+      "pomodoro-focus",
+      "code-metrics",
+      "quick-color-preview"
+    ],
+    "hotReloadExternalFiles": true
+  }
+}

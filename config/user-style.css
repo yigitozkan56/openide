@@ -1,0 +1,26 @@
+/* ============================================================================
+ * openide - Custom User Stylesheet (config/user-style.css)
+ * ----------------------------------------------------------------------------
+ * Edit and save this file either inside the IDE or with any external text
+ * editor; your CSS changes are hot-reloaded into the UI immediately without
+ * restarting the application!
+ *
+ * Available Material Design 3 CSS Variables:
+ *   --md-sys-color-primary
+ *   --md-sys-color-on-primary
+ *   --md-sys-color-primary-container
+ *   --md-sys-color-surface
+ *   --md-sys-color-surface-container
+ *   --md-sys-color-surface-container-high
+ *   --md-sys-shape-corner-medium
+ * ============================================================================ */
+
+/* Example: Soft glow on active tab indicator */
+.md3-tab.active::after {
+  box-shadow: 0 0 12px var(--md-sys-color-primary);
+}
+
+/* Example: Subtle hover lift on the Run FAB button */
+.md3-fab-run:hover {
+  transform: translateY(-2px) scale(1.03);
+}

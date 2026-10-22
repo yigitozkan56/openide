@@ -1,0 +1,1270 @@
+/* ============================================================================
+ * openide - Material Design 3 (Material You) Design System
+ * Complete Tonal Surface Architecture, Shape Tokens, Elevation & Components
+ * ============================================================================ */
+
+:root {
+  /* Default Material 3 Dark Tonal Palette (Ocean Dark) */
+  --md-sys-color-primary: #7DD3FC;
+  --md-sys-color-on-primary: #003549;
+  --md-sys-color-primary-container: #004D68;
+  --md-sys-color-on-primary-container: #C2E8FF;
+
+  --md-sys-color-secondary: #B6C9D8;
+  --md-sys-color-on-secondary: #20333E;
+  --md-sys-color-secondary-container: #374955;
+  --md-sys-color-on-secondary-container: #D2E5F5;
+
+  --md-sys-color-tertiary: #CAC1E9;
+  --md-sys-color-on-tertiary: #322C4C;
+  --md-sys-color-tertiary-container: #484264;
+  --md-sys-color-on-tertiary-container: #E6DEFF;
+
+  --md-sys-color-surface: #0E1419;
+  --md-sys-color-surface-dim: #0B0F14;
+  --md-sys-color-surface-bright: #333A40;
+  --md-sys-color-surface-container-lowest: #080C10;
+  --md-sys-color-surface-container-low: #151C22;
+  --md-sys-color-surface-container: #192026;
+  --md-sys-color-surface-container-high: #232B31;
+  --md-sys-color-surface-container-highest: #2E363C;
+
+  --md-sys-color-on-surface: #DEE3E9;
+  --md-sys-color-on-surface-variant: #BFC8D1;
+  --md-sys-color-outline: #89929B;
+  --md-sys-color-outline-variant: #3F4850;
+
+  --md-sys-color-error: #FFB4AB;
+  --md-sys-color-success: #6EE7B7;
+  --md-sys-color-warning: #FCD34D;
+
+  /* Material 3 Shape Scale (Dynamically customizable via cornerRadius setting) */
+  --md-corner-base: 16px;
+  --md-sys-shape-corner-extra-small: calc(var(--md-corner-base) * 0.25);
+  --md-sys-shape-corner-small: calc(var(--md-corner-base) * 0.5);
+  --md-sys-shape-corner-medium: calc(var(--md-corner-base) * 0.75);
+  --md-sys-shape-corner-large: var(--md-corner-base);
+  --md-sys-shape-corner-extra-large: calc(var(--md-corner-base) * 1.5);
+  --md-sys-shape-corner-full: 9999px;
+
+  /* Typography & Density */
+  --md-font-ui: 'Segoe UI Variable Text', 'Inter', 'Roboto', system-ui, -apple-system, sans-serif;
+  --md-font-mono: 'Cascadia Code', 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  --md-density-pad: 8px;
+  --md-transition-duration: 200ms;
+  --md-transition-easing: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* Density Presets */
+body[data-density="compact"] {
+  --md-density-pad: 4px;
+}
+body[data-density="comfortable"] {
+  --md-density-pad: 8px;
+}
+body[data-density="spacious"] {
+  --md-density-pad: 12px;
+}
+
+/* Disable animations when requested */
+body[data-animations="false"] * {
+  transition: none !important;
+  animation: none !important;
+}
+
+/* High contrast surface mode */
+body[data-contrast="high"] {
+  --md-sys-color-outline-variant: var(--md-sys-color-outline);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+html, body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--md-sys-color-surface-container-lowest);
+  color: var(--md-sys-color-on-surface);
+  font-family: var(--md-font-ui);
+  font-size: 13px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Scrollbars (MD3 Pill style) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--md-sys-color-outline-variant);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--md-sys-color-outline);
+}
+
+/* SVG Icon Utility */
+.md-icon {
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  fill: currentColor;
+}
+.md-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+.md-icon.sm { width: 15px; height: 15px; }
+.md-icon.lg { width: 22px; height: 22px; }
+
+/* ============================================================================
+ * App Root Shell Layout
+ * ============================================================================ */
+.ide-shell {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  background: var(--md-sys-color-surface-container-lowest);
+}
+
+/* ============================================================================
+ * Material 3 Top App Bar (Frameless Custom Window Titlebar)
+ * ============================================================================ */
+.md3-top-appbar {
+  height: 46px;
+  background: var(--md-sys-color-surface-container-low);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px 0 12px;
+  -webkit-app-region: drag;
+  z-index: 100;
+  gap: 10px;
+}
+
+.appbar-left, .appbar-center, .appbar-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  -webkit-app-region: no-drag;
+}
+
+.app-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 13.5px;
+  letter-spacing: 0.2px;
+  color: var(--md-sys-color-primary);
+  padding-right: 8px;
+  -webkit-app-region: drag;
+}
+
+.app-brand-badge {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--md-sys-shape-corner-small);
+  background: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Top Menu Bar Buttons */
+.menubar-group {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.menu-btn {
+  background: transparent;
+  border: none;
+  color: var(--md-sys-color-on-surface-variant);
+  padding: 5px 10px;
+  border-radius: var(--md-sys-shape-corner-full);
+  font-size: 12.5px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background var(--md-transition-duration) var(--md-transition-easing),
+              color var(--md-transition-duration) var(--md-transition-easing);
+  position: relative;
+}
+.menu-btn:hover, .menu-btn.active {
+  background: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-on-surface);
+}
+
+/* Material 3 Search / Command Bar in Center of App Bar */
+.md3-search-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--md-sys-color-surface-container);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  color: var(--md-sys-color-on-surface-variant);
+  height: 32px;
+  min-width: 320px;
+  max-width: 480px;
+  padding: 0 14px;
+  border-radius: var(--md-sys-shape-corner-full);
+  cursor: pointer;
+  transition: all var(--md-transition-duration) var(--md-transition-easing);
+}
+.md3-search-pill:hover {
+  background: var(--md-sys-color-surface-container-high);
+  border-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-surface);
+}
+.md3-search-pill-text {
+  flex: 1;
+  font-size: 12.5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.kbd-badge {
+  font-family: var(--md-font-mono);
+  font-size: 10.5px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: var(--md-sys-color-surface-container-highest);
+  color: var(--md-sys-color-on-surface-variant);
+  border: 1px solid var(--md-sys-color-outline-variant);
+}
+
+/* Quick Action Chips on Right of Appbar */
+.md3-tonal-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 12px;
+  border-radius: var(--md-sys-shape-corner-full);
+  border: 1px solid transparent;
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--md-transition-duration) var(--md-transition-easing);
+}
+.md3-tonal-btn:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.md3-tonal-btn.primary {
+  background: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+}
+.md3-tonal-btn.primary-container {
+  background: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+}
+.md3-tonal-btn.outline {
+  background: transparent;
+  border-color: var(--md-sys-color-outline-variant);
+  color: var(--md-sys-color-on-surface);
+}
+.md3-tonal-btn.outline:hover {
+  background: var(--md-sys-color-surface-container-high);
+}
+.md3-tonal-btn.danger {
+  background: rgba(255, 180, 171, 0.16);
+  color: var(--md-sys-color-error);
+  border-color: var(--md-sys-color-error);
+}
+
+.md3-icon-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--md-sys-shape-corner-full);
+  border: none;
+  background: transparent;
+  color: var(--md-sys-color-on-surface-variant);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--md-transition-duration) var(--md-transition-easing);
+}
+.md3-icon-btn:hover, .md3-icon-btn.active {
+  background: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-primary);
+}
+
+/* Quick Seed Color Picker Pill */
+.seed-picker-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 10px;
+  border-radius: var(--md-sys-shape-corner-full);
+  background: var(--md-sys-color-surface-container);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  color: var(--md-sys-color-on-surface);
+  font-size: 11.5px;
+  cursor: pointer;
+}
+.seed-picker-chip input[type="color"] {
+  width: 18px;
+  height: 18px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Window Control Buttons */
+.window-controls {
+  display: flex;
+  align-items: center;
+  margin-left: 4px;
+}
+.win-btn {
+  width: 36px;
+  height: 32px;
+  border: none;
+  border-radius: var(--md-sys-shape-corner-small);
+  background: transparent;
+  color: var(--md-sys-color-on-surface-variant);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 150ms ease, color 150ms ease;
+}
+.win-btn:hover {
+  background: var(--md-sys-color-surface-container-highest);
+  color: var(--md-sys-color-on-surface);
+}
+.win-btn.close:hover {
+  background: #E11D48;
+  color: #FFFFFF;
+}
+
+/* ============================================================================
+ * Main Workspace Body (Navigation Rail + Drawer + Editor + Preview)
+ * ============================================================================ */
+.ide-main {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Sidebar on Right customization */
+body[data-sidebar-pos="right"] .ide-main {
+  flex-direction: row-reverse;
+}
+
+/* Material 3 Navigation Rail */
+.md3-nav-rail {
+  width: 68px;
+  background: var(--md-sys-color-surface-container-low);
+  border-right: 1px solid var(--md-sys-color-outline-variant);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  z-index: 20;
+  flex-shrink: 0;
+}
+body[data-sidebar-pos="right"] .md3-nav-rail {
+  border-right: none;
+  border-left: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.nav-rail-top, .nav-rail-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.nav-rail-item {
+  width: 58px;
+  border: none;
+  background: transparent;
+  color: var(--md-sys-color-on-surface-variant);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 4px 0;
+  cursor: pointer;
+  font-family: inherit;
+  transition: color var(--md-transition-duration) var(--md-transition-easing);
+}
+
+.nav-rail-pill {
+  width: 52px;
+  height: 30px;
+  border-radius: var(--md-sys-shape-corner-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--md-transition-duration) var(--md-transition-easing);
+  position: relative;
+}
+
+.nav-rail-item:hover .nav-rail-pill {
+  background: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-on-surface);
+}
+
+.nav-rail-item.active {
+  color: var(--md-sys-color-on-surface);
+}
+
+.nav-rail-item.active .nav-rail-pill {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+.nav-rail-label {
+  font-size: 10.5px;
+  font-weight: 500;
+  text-align: center;
+  max-width: 62px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Material 3 Side Drawer (Explorer / Search / Git / Plugins / Customization) */
+.md3-side-drawer {
+  width: 290px;
+  min-width: 200px;
+  max-width: 520px;
+  background: var(--md-sys-color-surface-container-low);
+  border-right: 1px solid var(--md-sys-color-outline-variant);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+body[data-sidebar-pos="right"] .md3-side-drawer {
+  border-right: none;
+  border-left: 1px solid var(--md-sys-color-outline-variant);
+}
+.md3-side-drawer.collapsed {
+  display: none;
+}
+
+.drawer-header {
+  height: 42px;
+  padding: 0 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  font-weight: 600;
+  font-size: 12.5px;
+  letter-spacing: 0.3px;
+  color: var(--md-sys-color-on-surface);
+}
+
+.drawer-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.drawer-view {
+  display: none;
+  flex-direction: column;
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+  gap: 10px;
+}
+.drawer-view.active {
+  display: flex;
+}
+
+/* File Tree Items in Explorer */
+.workspace-banner {
+  background: var(--md-sys-color-surface-container);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-sys-shape-corner-medium);
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.workspace-name {
+  font-weight: 700;
+  font-size: 12.5px;
+  color: var(--md-sys-color-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-tree-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tree-node {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 10px;
+  border-radius: var(--md-sys-shape-corner-small);
+  cursor: pointer;
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: 12.5px;
+  transition: background 120ms ease, color 120ms ease;
+  position: relative;
+}
+.tree-node:hover {
+  background: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-on-surface);
+}
+.tree-node.active {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+  font-weight: 600;
+}
+.tree-node-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tree-node-actions {
+  display: none;
+  align-items: center;
+  gap: 2px;
+}
+.tree-node:hover .tree-node-actions {
+  display: flex;
+}
+.tree-children {
+  padding-left: 14px;
+  border-left: 1px dashed var(--md-sys-color-outline-variant);
+  margin-left: 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.tree-children.collapsed {
+  display: none;
+}
+
+/* ============================================================================
+ * Center Editor & Bottom Dock Area
+ * ============================================================================ */
+.ide-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--md-sys-color-surface);
+  margin: 6px;
+  border-radius: var(--md-sys-shape-corner-large);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
+}
+
+/* Material 3 Tab Bar */
+.md3-tabbar {
+  height: 42px;
+  background: var(--md-sys-color-surface-container-low);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+  gap: 6px;
+  overflow-x: auto;
+}
+.tabs-scroll {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  overflow-x: auto;
+  flex: 1;
+  padding: 4px 0;
+}
+
+.md3-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: var(--md-sys-shape-corner-small);
+  background: var(--md-sys-color-surface-container);
+  color: var(--md-sys-color-on-surface-variant);
+  border: 1px solid transparent;
+  font-size: 12.5px;
+  cursor: pointer;
+  white-space: nowrap;
+  position: relative;
+  transition: all var(--md-transition-duration) var(--md-transition-easing);
+}
+.md3-tab:hover {
+  background: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-on-surface);
+}
+.md3-tab.active {
+  background: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+  font-weight: 600;
+  border-color: var(--md-sys-color-primary);
+}
+.md3-tab.dirty .tab-dirty-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--md-sys-color-primary);
+  display: inline-block;
+}
+.tab-close-btn {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: currentColor;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0.7;
+}
+.tab-close-btn:hover {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* Breadcrumbs & Editor Toolbar Bar */
+.md3-breadcrumbs-bar {
+  height: 28px;
+  background: var(--md-sys-color-surface);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  font-size: 11.5px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.breadcrumbs-path {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Editor Split Workbench (Primary Monaco + Secondary Split/Diff + Live Preview + Customization Studio) */
+.editor-workbench {
+  flex: 1;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+.monaco-pane {
+  flex: 1;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.secondary-pane {
+  flex: 1;
+  height: 100%;
+  border-left: 1px solid var(--md-sys-color-outline-variant);
+  display: none;
+  flex-direction: column;
+  background: var(--md-sys-color-surface);
+  overflow: hidden;
+}
+.secondary-pane.visible {
+  display: flex;
+}
+
+.secondary-pane-header {
+  height: 34px;
+  padding: 0 12px;
+  background: var(--md-sys-color-surface-container-low);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.preview-iframe {
+  flex: 1;
+  width: 100%;
+  border: none;
+  background: #FFFFFF;
+}
+
+.markdown-preview-container {
+  flex: 1;
+  padding: 20px 26px;
+  overflow-y: auto;
+  color: var(--md-sys-color-on-surface);
+  user-select: text;
+  line-height: 1.65;
+}
+.markdown-preview-container h1,
+.markdown-preview-container h2,
+.markdown-preview-container h3 {
+  color: var(--md-sys-color-primary);
+  margin: 14px 0 8px;
+}
+.markdown-preview-container code {
+  background: var(--md-sys-color-surface-container-high);
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-family: var(--md-font-mono);
+}
+.markdown-preview-container pre {
+  background: var(--md-sys-color-surface-container);
+  padding: 14px;
+  border-radius: var(--md-sys-shape-corner-medium);
+  overflow-x: auto;
+  margin: 10px 0;
+}
+
+/* ============================================================================
+ * In-App Customization Studio Overlay / Full Tab View
+ * ============================================================================ */
+.customization-studio-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--md-sys-color-surface);
+  z-index: 40;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+}
+.customization-studio-overlay.visible {
+  display: flex;
+}
+
+.studio-topbar {
+  padding: 16px 24px;
+  background: var(--md-sys-color-surface-container-low);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.studio-title-group h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--md-sys-color-primary);
+}
+.studio-title-group p {
+  font-size: 12px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.studio-nav-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 10px 24px;
+  background: var(--md-sys-color-surface-container-low);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  flex-wrap: wrap;
+}
+
+.studio-tab-btn {
+  padding: 7px 16px;
+  border-radius: var(--md-sys-shape-corner-full);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  background: var(--md-sys-color-surface-container);
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  transition: all 150ms ease;
+}
+.studio-tab-btn.active, .studio-tab-btn:hover {
+  background: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+  border-color: var(--md-sys-color-primary);
+}
+
+.studio-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 22px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.studio-section {
+  display: none;
+  flex-direction: column;
+  gap: 18px;
+}
+.studio-section.active {
+  display: flex;
+}
+
+.md3-card {
+  background: var(--md-sys-color-surface-container);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-sys-shape-corner-large);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.md3-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.md3-card-title {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--md-sys-color-on-surface);
+}
+.md3-card-subtitle {
+  font-size: 12px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.theme-card {
+  background: var(--md-sys-color-surface-container-high);
+  border: 2px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-sys-shape-corner-medium);
+  padding: 14px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all 160ms ease;
+}
+.theme-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--md-sys-color-primary);
+}
+.theme-card.active {
+  border-color: var(--md-sys-color-primary);
+  box-shadow: 0 0 0 2px var(--md-sys-color-primary-container);
+}
+.theme-swatches {
+  display: flex;
+  gap: 6px;
+}
+.theme-swatch {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Form Controls in Studio & Drawer */
+.settings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+}
+
+.md3-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.md3-field label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.md3-input, .md3-select, .md3-textarea {
+  background: var(--md-sys-color-surface-container-high);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  color: var(--md-sys-color-on-surface);
+  border-radius: var(--md-sys-shape-corner-small);
+  padding: 8px 12px;
+  font-family: inherit;
+  font-size: 12.5px;
+  outline: none;
+  transition: border-color 150ms ease;
+}
+.md3-input:focus, .md3-select:focus, .md3-textarea:focus {
+  border-color: var(--md-sys-color-primary);
+}
+.md3-textarea {
+  font-family: var(--md-font-mono);
+  min-height: 180px;
+  resize: vertical;
+  user-select: text;
+}
+
+.md3-switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: var(--md-sys-color-surface-container-high);
+  border-radius: var(--md-sys-shape-corner-small);
+  border: 1px solid var(--md-sys-color-outline-variant);
+}
+
+/* Material 3 Floating Action Button (FAB) */
+.md3-fab-run {
+  position: absolute;
+  right: 22px;
+  bottom: 22px;
+  height: 46px;
+  padding: 0 20px;
+  border-radius: var(--md-sys-shape-corner-large);
+  background: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+  border: 1px solid var(--md-sys-color-primary);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 30;
+  transition: all 180ms cubic-bezier(0.2, 0, 0, 1);
+}
+.md3-fab-run:hover {
+  background: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  transform: translateY(-2px);
+}
+
+/* ============================================================================
+ * Material 3 Bottom Dock Panel (Terminal, Runner Output, Problems)
+ * ============================================================================ */
+.md3-bottom-panel {
+  height: 230px;
+  min-height: 120px;
+  max-height: 60vh;
+  background: var(--md-sys-color-surface-container-low);
+  border-top: 1px solid var(--md-sys-color-outline-variant);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.md3-bottom-panel.collapsed {
+  display: none;
+}
+
+.bottom-panel-header {
+  height: 36px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.bottom-panel-tabs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.panel-tab-btn {
+  padding: 4px 12px;
+  border-radius: var(--md-sys-shape-corner-full);
+  border: none;
+  background: transparent;
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.panel-tab-btn.active {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+.terminal-output {
+  flex: 1;
+  padding: 10px 14px;
+  font-family: var(--md-font-mono);
+  font-size: 12.5px;
+  line-height: 1.5;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  user-select: text;
+  color: var(--md-sys-color-on-surface);
+  background: var(--md-sys-color-surface-container-lowest);
+}
+.terminal-output .stderr {
+  color: var(--md-sys-color-error);
+}
+.terminal-output .sys-msg {
+  color: var(--md-sys-color-primary);
+  font-weight: 600;
+}
+.terminal-output .success-msg {
+  color: var(--md-sys-color-success);
+}
+
+.terminal-input-bar {
+  height: 34px;
+  background: var(--md-sys-color-surface-container);
+  border-top: 1px solid var(--md-sys-color-outline-variant);
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 8px;
+}
+.terminal-prompt-symbol {
+  font-family: var(--md-font-mono);
+  font-weight: 700;
+  color: var(--md-sys-color-primary);
+}
+.terminal-cmd-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--md-sys-color-on-surface);
+  font-family: var(--md-font-mono);
+  font-size: 12.5px;
+  outline: none;
+}
+
+/* ============================================================================
+ * Material 3 Bottom Status Bar
+ * ============================================================================ */
+.md3-statusbar {
+  height: 28px;
+  background: var(--md-sys-color-surface-container-low);
+  border-top: 1px solid var(--md-sys-color-outline-variant);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  font-size: 11.5px;
+  color: var(--md-sys-color-on-surface-variant);
+  z-index: 90;
+}
+
+.statusbar-left, .statusbar-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 9px;
+  border-radius: var(--md-sys-shape-corner-full);
+  background: var(--md-sys-color-surface-container);
+  color: var(--md-sys-color-on-surface-variant);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 140ms ease;
+}
+.status-chip:hover {
+  background: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-on-surface);
+  border-color: var(--md-sys-color-outline-variant);
+}
+.status-chip.primary {
+  background: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+}
+
+/* ============================================================================
+ * Material 3 Command Palette / Quick Open / Modal Dialogs & Snackbar
+ * ============================================================================ */
+.md3-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.52);
+  backdrop-filter: blur(4px);
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 68px;
+  z-index: 500;
+}
+.md3-backdrop.visible {
+  display: flex;
+}
+
+.md3-dialog {
+  width: 620px;
+  max-width: 92vw;
+  max-height: 76vh;
+  background: var(--md-sys-color-surface-container-high);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-sys-shape-corner-extra-large);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.48);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.palette-search-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+}
+.palette-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--md-sys-color-on-surface);
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+}
+
+.palette-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.palette-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 14px;
+  border-radius: var(--md-sys-shape-corner-medium);
+  cursor: pointer;
+  color: var(--md-sys-color-on-surface);
+}
+.palette-item:hover, .palette-item.selected {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+/* Material 3 Snackbar */
+.md3-snackbar-container {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 900;
+  pointer-events: none;
+}
+
+.md3-snackbar {
+  background: var(--md-sys-color-on-surface);
+  color: var(--md-sys-color-surface);
+  padding: 10px 18px;
+  border-radius: var(--md-sys-shape-corner-small);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  font-size: 12.5px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: snackbarIn 200ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+@keyframes snackbarIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Dropdown Menu */
+.md3-dropdown-menu {
+  position: fixed;
+  top: 42px;
+  min-width: 220px;
+  background: var(--md-sys-color-surface-container-high);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-sys-shape-corner-medium);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4);
+  padding: 6px;
+  z-index: 600;
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+}
+.md3-dropdown-menu.visible {
+  display: flex;
+}
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 12px;
+  border-radius: var(--md-sys-shape-corner-small);
+  border: none;
+  background: transparent;
+  color: var(--md-sys-color-on-surface);
+  font-family: inherit;
+  font-size: 12.5px;
+  cursor: pointer;
+  text-align: left;
+}
+.dropdown-item:hover {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+.dropdown-divider {
+  height: 1px;
+  background: var(--md-sys-color-outline-variant);
+  margin: 4px 6px;
+}

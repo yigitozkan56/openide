@@ -1,0 +1,9 @@
+{
+  "id": "code-metrics",
+  "name": "Code Metrics & Complexity",
+  "version": "1.0.0",
+  "author": "openide Community",
+  "description": "Displays live word count, line statistics, function count, and cyclomatic complexity estimate for the active file.",
+  "main": "main.js",
+  "icon": "analytics"
+}

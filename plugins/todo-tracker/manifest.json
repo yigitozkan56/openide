@@ -1,0 +1,9 @@
+{
+  "id": "todo-tracker",
+  "name": "TODO & FIXME Tracker",
+  "version": "1.0.0",
+  "author": "openide Community",
+  "description": "Automatically scans the active file for TODO, FIXME, NOTE, and BUG tags and displays a status bar counter.",
+  "main": "main.js",
+  "icon": "checklist"
+}

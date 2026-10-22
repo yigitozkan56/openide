@@ -1,0 +1,9 @@
+{
+  "id": "pomodoro-focus",
+  "name": "Pomodoro Focus Timer",
+  "version": "1.0.0",
+  "author": "openide Community",
+  "description": "Adds a Material Design 3 25-minute Pomodoro productivity timer chip to the status bar.",
+  "main": "main.js",
+  "icon": "timer"
+}

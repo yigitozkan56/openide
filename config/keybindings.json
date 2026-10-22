@@ -1,0 +1,113 @@
+{
+  "_comment": "openide - Keyboard Shortcuts (Customizable in-app or via this external JSON file)",
+  "shortcuts": [
+    {
+      "id": "file.new",
+      "command": "New File",
+      "key": "Ctrl+N",
+      "category": "File"
+    },
+    {
+      "id": "file.open",
+      "command": "Open File",
+      "key": "Ctrl+O",
+      "category": "File"
+    },
+    {
+      "id": "file.openFolder",
+      "command": "Open Folder",
+      "key": "Ctrl+K",
+      "category": "File"
+    },
+    {
+      "id": "file.save",
+      "command": "Save",
+      "key": "Ctrl+S",
+      "category": "File"
+    },
+    {
+      "id": "file.saveAll",
+      "command": "Save All",
+      "key": "Ctrl+Shift+S",
+      "category": "File"
+    },
+    {
+      "id": "file.closeTab",
+      "command": "Close Tab",
+      "key": "Ctrl+W",
+      "category": "File"
+    },
+    {
+      "id": "view.commandPalette",
+      "command": "Command Palette",
+      "key": "Ctrl+Shift+P",
+      "category": "View"
+    },
+    {
+      "id": "view.quickOpen",
+      "command": "Quick Open File",
+      "key": "Ctrl+P",
+      "category": "View"
+    },
+    {
+      "id": "view.toggleSidebar",
+      "command": "Toggle Sidebar",
+      "key": "Ctrl+B",
+      "category": "View"
+    },
+    {
+      "id": "view.toggleTerminal",
+      "command": "Toggle Bottom Panel",
+      "key": "Ctrl+`",
+      "category": "View"
+    },
+    {
+      "id": "view.togglePreview",
+      "command": "Toggle Live Preview",
+      "key": "Ctrl+Shift+V",
+      "category": "View"
+    },
+    {
+      "id": "view.splitEditor",
+      "command": "Split Editor",
+      "key": "Ctrl+\\",
+      "category": "View"
+    },
+    {
+      "id": "view.customizationStudio",
+      "command": "Customization Studio",
+      "key": "Ctrl+,",
+      "category": "Customize"
+    },
+    {
+      "id": "run.executeFile",
+      "command": "Run Active File",
+      "key": "F5",
+      "category": "Run"
+    },
+    {
+      "id": "run.stopProcess",
+      "command": "Stop Running Process",
+      "key": "Shift+F5",
+      "category": "Run"
+    },
+    {
+      "id": "editor.format",
+      "command": "Format Document",
+      "key": "Shift+Alt+F",
+      "category": "Editor"
+    },
+    {
+      "id": "editor.findInFiles",
+      "command": "Find in Files",
+      "key": "Ctrl+Shift+F",
+      "category": "Editor"
+    },
+    {
+      "id": "view.zenMode",
+      "command": "Toggle Zen Mode",
+      "key": "F11",
+      "category": "View"
+    }
+  ]
+}

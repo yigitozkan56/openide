@@ -1,0 +1,31 @@
+{
+  "name": "openide",
+  "productName": "openide",
+  "version": "1.0.0",
+  "description": "openide - Open-Source Material Design 3 (Material You) IDE with Live In-App & Out-of-App Customization",
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "build:exe": "node scripts/build-exe.js"
+  },
+  "keywords": [
+    "openide",
+    "ide",
+    "code-editor",
+    "material-design-3",
+    "material-you",
+    "monaco-editor",
+    "customizable",
+    "open-source"
+  ],
+  "author": "openide Contributors",
+  "license": "MIT",
+  "dependencies": {
+    "@material/material-color-utilities": "^0.3.0",
+    "monaco-editor": "^0.52.2"
+  },
+  "devDependencies": {
+    "@electron/packager": "^18.3.6",
+    "electron": "^35.0.0"
+  }
+}

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>openide — Material Design 3 Open Source IDE</title>
+  <link rel="stylesheet" href="styles/material3.css">
+</head>
+<body data-density="comfortable" data-sidebar-pos="left" data-contrast="standard" data-animations="true">
+
+  <div class="ide-shell">
+
+    <!-- ================================================================== -->
+    <!-- MATERIAL 3 TOP APP BAR (Frameless Custom Window Titlebar)          -->
+    <!-- ================================================================== -->
+    <header class="md3-top-appbar">
+      <div class="appbar-left">
+        <div class="app-brand">
+          <div class="app-brand-badge" data-icon="logo"></div>
+          <span>openide</span>
+        </div>
+
+        <nav class="menubar-group">
+          <button class="menu-btn" data-menu="file">File</button>
+          <button class="menu-btn" data-menu="view">View</button>
+          <button class="menu-btn" data-menu="run">Run</button>
+          <button class="menu-btn" data-menu="customize">Customize</button>
+        </nav>
+      </div>
+
+      <div class="appbar-center">
+        <div class="md3-search-pill" id="top-search-pill" title="Open Command Palette (Ctrl+Shift+P) or Quick Open Files (Ctrl+P)">
+          <span data-icon="search" data-icon-size="sm"></span>
+          <span class="md3-search-pill-text" data-i18n="searchPlaceholder">Run command (Ctrl+Shift+P) or search files (Ctrl+P)...</span>
+          <span class="kbd-badge">Ctrl+Shift+P</span>
+        </div>
+      </div>
+
+      <div class="appbar-right">
+        <button class="md3-tonal-btn primary" id="top-run-btn" title="Run Active File (F5)">
+          <span data-icon="play" data-icon-size="sm"></span>
+          <span data-i18n="runCode">Run (F5)</span>
+        </button>
+
+        <button class="md3-tonal-btn danger" id="top-stop-btn" style="display:none;" title="Stop Running Process (Shift+F5)">
+          <span data-icon="stop" data-icon-size="sm"></span>
+          <span data-i18n="stopCode">Stop</span>
+        </button>
+
+        <button class="md3-tonal-btn outline" id="top-preview-btn" title="Live HTML / Markdown Preview (Ctrl+Shift+V)">
+          <span data-icon="preview" data-icon-size="sm"></span>
+          <span data-i18n="livePreview">Preview</span>
+        </button>
+
+        <button class="md3-tonal-btn outline" id="top-split-btn" title="Split Editor (Ctrl+\)">
+          <span data-icon="split" data-icon-size="sm"></span>
+          <span data-i18n="splitEditor">Split</span>
+        </button>
+
+        <label class="seed-picker-chip" title="Material You Dynamic Seed Color Picker (Instantly Themes the Entire IDE)">
+          <input type="color" id="quick-seed-input" value="#38BDF8">
+          <span>MD3 Seed</span>
+        </label>
+
+        <button class="md3-icon-btn" id="top-theme-mode-btn" title="Toggle Dark / Light Theme Mode">
+          <span data-icon="sun"></span>
+        </button>
+
+        <button class="md3-icon-btn" id="top-customize-btn" title="Material You Customization Studio (Ctrl+,)">
+          <span data-icon="palette"></span>
+        </button>
+
+        <div class="window-controls">
+          <button class="win-btn" id="win-min-btn" title="Minimize"><span data-icon="minimize" data-icon-size="sm"></span></button>
+          <button class="win-btn" id="win-max-btn" title="Maximize / Restore"><span data-icon="maximize" data-icon-size="sm"></span></button>
+          <button class="win-btn close" id="win-close-btn" title="Close"><span data-icon="close" data-icon-size="sm"></span></button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Dropdown Menu Container -->
+    <div class="md3-dropdown-menu" id="top-dropdown-menu"></div>
+
+    <!-- ================================================================== -->
+    <!-- MAIN IDE BODY (Navigation Rail + Side Drawer + Editor Workbench)   -->
+    <!-- ================================================================== -->
+    <div class="ide-main">
+
+      <!-- MATERIAL 3 NAVIGATION RAIL -->
+      <aside class="md3-nav-rail">
+        <div class="nav-rail-top">
+          <button class="nav-rail-item active" data-drawer="explorer" title="Project Explorer (Ctrl+B)">
+            <div class="nav-rail-pill" data-icon="folder"></div>
+            <span class="nav-rail-label" data-i18n="explorer">Explorer</span>
+          </button>
+
+          <button class="nav-rail-item" data-drawer="search" title="Search & Replace in Files (Ctrl+Shift+F)">
+            <div class="nav-rail-pill" data-icon="search"></div>
+            <span class="nav-rail-label" data-i18n="search">Search</span>
+          </button>
+
+          <button class="nav-rail-item" data-drawer="git" title="Git Source Control">
+            <div class="nav-rail-pill" data-icon="git"></div>
+            <span class="nav-rail-label" data-i18n="git">Git</span>
+          </button>
+
+          <button class="nav-rail-item" data-drawer="runners" title="Language Runners & Code Snippets">
+            <div class="nav-rail-pill" data-icon="bolt"></div>
+            <span class="nav-rail-label" data-i18n="runners">Run & Snippets</span>
+          </button>
+
+          <button class="nav-rail-item" data-drawer="plugins" title="Plugin Manager & Plugin Creator (plugins/*)">
+            <div class="nav-rail-pill" data-icon="extension"></div>
+            <span class="nav-rail-label" data-i18n="plugins">Plugins</span>
+          </button>
+        </div>
+
+        <div class="nav-rail-bottom">
+          <button class="nav-rail-item" data-drawer="customize-studio" title="Material You Customization Studio (In-App & Out-of-App Customization - Ctrl+,)">
+            <div class="nav-rail-pill" data-icon="palette"></div>
+            <span class="nav-rail-label" data-i18n="customize">Customize</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- MATERIAL 3 SIDE DRAWER -->
+      <section class="md3-side-drawer" id="side-drawer">
+        <div class="drawer-header">
+          <span id="drawer-header-title">EXPLORER</span>
+          <div class="drawer-actions">
+            <button class="md3-icon-btn" id="btn-new-file" title="New File (Ctrl+N)"><span data-icon="add" data-icon-size="sm"></span></button>
+            <button class="md3-icon-btn" id="btn-new-folder" title="New Folder"><span data-icon="folder" data-icon-size="sm"></span></button>
+            <button class="md3-icon-btn" id="btn-refresh-tree" title="Refresh"><span data-icon="refresh" data-icon-size="sm"></span></button>
+          </div>
+        </div>
+
+        <!-- View 1: File Explorer -->
+        <div class="drawer-view active" id="drawer-explorer">
+          <div class="workspace-banner">
+            <span class="workspace-name" id="workspace-folder-name">examples</span>
+            <button class="md3-tonal-btn outline" id="btn-open-folder" style="height:26px; padding:0 10px; font-size:11px;">Open Folder</button>
+          </div>
+          <div class="file-tree-container" id="file-tree-root"></div>
+        </div>
+
+        <!-- View 2: Search & Replace in Files -->
+        <div class="drawer-view" id="drawer-search">
+          <div class="md3-field">
+            <label>Search in Files</label>
+            <input type="text" class="md3-input" id="workspace-search-input" placeholder="Search text...">
+          </div>
+          <div class="md3-field">
+            <label>Replace With</label>
+            <input type="text" class="md3-input" id="workspace-replace-input" placeholder="Replacement text...">
+          </div>
+          <div style="display:flex; gap:6px;">
+            <button class="md3-tonal-btn primary" id="btn-exec-search" style="flex:1;">Search</button>
+            <button class="md3-tonal-btn outline" id="btn-exec-replace" style="flex:1;">Replace All</button>
+          </div>
+          <div id="workspace-search-results" style="display:flex; flex-direction:column; gap:6px; margin-top:6px;"></div>
+        </div>
+
+        <!-- View 3: Git Source Control -->
+        <div class="drawer-view" id="drawer-git">
+          <div id="git-drawer-content" style="display:flex; flex-direction:column; gap:10px;"></div>
+        </div>
+
+        <!-- View 4: Runners & Snippets -->
+        <div class="drawer-view" id="drawer-runners">
+          <div id="runners-drawer-content" style="display:flex; flex-direction:column; gap:10px;"></div>
+        </div>
+
+        <!-- View 5: Plugins -->
+        <div class="drawer-view" id="drawer-plugins">
+          <div id="plugins-drawer-content" style="display:flex; flex-direction:column; gap:10px;"></div>
+        </div>
+      </section>
+
+      <!-- CENTER WORKBENCH (Tabs + Monaco Editor + Split/Preview + Bottom Terminal) -->
+      <main class="ide-center">
+
+        <!-- Material 3 Tab Bar -->
+        <div class="md3-tabbar">
+          <div class="tabs-scroll" id="tabs-scroll-container"></div>
+        </div>
+
+        <!-- Breadcrumbs Bar -->
+        <div class="md3-breadcrumbs-bar">
+          <div class="breadcrumbs-path">
+            <span data-icon="folder_open" data-icon-size="sm"></span>
+            <span id="breadcrumbs-path">openide</span>
+          </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <span style="font-size:11px; opacity:0.8;">Hot-Reload Active (config/ & plugins/)</span>
+          </div>
+        </div>
+
+        <!-- Editor & Secondary Split/Preview Workbench -->
+        <div class="editor-workbench">
+          <div class="monaco-pane" id="monaco-primary"></div>
+
+          <div class="secondary-pane" id="secondary-pane">
+            <div class="secondary-pane-header">
+              <span id="secondary-pane-title">Live Preview</span>
+              <button class="md3-icon-btn" id="close-secondary-pane-btn" title="Close Pane">
+                <span data-icon="close" data-icon-size="sm"></span>
+              </button>
+            </div>
+            <div id="live-preview-wrapper" style="flex:1; display:flex; flex-direction:column; overflow:hidden;">
+              <iframe class="preview-iframe" id="html-preview-iframe"></iframe>
+              <div class="markdown-preview-container" id="markdown-preview-box" style="display:none;"></div>
+            </div>
+            <div id="monaco-secondary" style="flex:1; display:none;"></div>
+          </div>
+
+          <!-- Material 3 Extended Floating Action Button (Quick Run) -->
+          <button class="md3-fab-run" id="fab-run-btn" title="Run Active Code (F5)">
+            <span data-icon="play"></span>
+            <span>Run</span>
+          </button>
+
+          <!-- ============================================================ -->
+          <!-- IN-APP & OUT-OF-APP CUSTOMIZATION STUDIO OVERLAY             -->
+          <!-- ============================================================ -->
+          <div class="customization-studio-overlay" id="customization-studio-overlay">
+            <div class="studio-topbar">
+              <div class="studio-title-group">
+                <h2>Material You Customization Studio (In-App & Out-of-App)</h2>
+                <p>All changes made here are immediately saved to the external JSON and CSS files in <code>config/</code>, and any external edits hot-reload automatically.</p>
+              </div>
+              <button class="md3-tonal-btn primary" id="close-studio-btn">
+                <span data-icon="close" data-icon-size="sm"></span>
+                Back to Editor
+              </button>
+            </div>
+
+            <div class="studio-nav-tabs">
+              <button class="studio-tab-btn active" data-studio-sec="studio-sec-themes">🎨 Themes & Material You Generator</button>
+              <button class="studio-tab-btn" data-studio-sec="studio-sec-layout">📐 Layout, Shape & Density</button>
+              <button class="studio-tab-btn" data-studio-sec="studio-sec-editor">📝 Code Editor Preferences</button>
+              <button class="studio-tab-btn" data-studio-sec="studio-sec-keybindings">⌨️ Visual Keybinding Recorder</button>
+              <button class="studio-tab-btn" data-studio-sec="studio-sec-runners">▶️ Language Runners</button>
+              <button class="studio-tab-btn" data-studio-sec="studio-sec-external">📂 Out-of-App (JSON / Live CSS / Bundle)</button>
+            </div>
+
+            <div class="studio-body" id="customization-studio-content"></div>
+          </div>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- MATERIAL 3 BOTTOM PANEL (Integrated Terminal & Code Runner)    -->
+        <!-- ============================================================== -->
+        <section class="md3-bottom-panel" id="bottom-panel">
+          <div class="bottom-panel-header">
+            <div class="bottom-panel-tabs">
+              <button class="panel-tab-btn active">
+                <span data-icon="terminal" data-icon-size="sm"></span>
+                Terminal & Code Output (Interactive Runner)
+              </button>
+            </div>
+            <div style="display:flex; align-items:center; gap:4px;">
+              <button class="md3-icon-btn" id="terminal-clear-btn" title="Clear Terminal"><span data-icon="delete" data-icon-size="sm"></span></button>
+              <button class="md3-icon-btn" id="terminal-close-btn" title="Hide Panel (Ctrl+`)"><span data-icon="close" data-icon-size="sm"></span></button>
+            </div>
+          </div>
+
+          <div class="terminal-output" id="terminal-output">
+            <span class="sys-msg">openide Interactive Terminal & Code Runner Ready.</span>
+            <span>\nPress <strong>F5</strong> to run the active file, or type any PowerShell/Shell command in the input bar below.\n</span>
+          </div>
+
+          <div class="terminal-input-bar">
+            <span class="terminal-prompt-symbol">❯</span>
+            <input type="text" class="terminal-cmd-input" id="terminal-cmd-input" placeholder="Execute command (e.g. python --version, node -v, git status) or send stdin to a running process...">
+          </div>
+        </section>
+
+      </main>
+    </div>
+
+    <!-- ================================================================== -->
+    <!-- MATERIAL 3 STATUS BAR                                              -->
+    <!-- ================================================================== -->
+    <footer class="md3-statusbar">
+      <div class="statusbar-left">
+        <button class="status-chip primary" onclick="window.MateriaApp.openCustomizationStudio('studio-sec-themes')" title="Active Theme (Click to customize)">
+          <span data-icon="palette" data-icon-size="sm"></span>
+          <span id="status-theme-name">Material Ocean Dark</span>
+        </button>
+
+        <button class="status-chip" title="Active Git Branch">
+          <span data-icon="git" data-icon-size="sm"></span>
+          <span id="status-git-branch">main</span>
+        </button>
+
+        <!-- Dynamic Plugin Statusbar Items Injected Here -->
+        <div id="plugin-statusbar-items" style="display:flex; align-items:center; gap:6px;"></div>
+      </div>
+
+      <div class="statusbar-right">
+        <span class="status-chip" id="status-cursor-pos">Ln 1, Col 1</span>
+        <span class="status-chip" id="status-language">PYTHON</span>
+        <span class="status-chip">UTF-8</span>
+        <button class="status-chip" onclick="window.MateriaApp.openCustomizationStudio('studio-sec-external')" title="External Configuration & Live CSS">
+          <span>⚙️ config/ & plugins/</span>
+        </button>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- ==================================================================== -->
+  <!-- COMMAND PALETTE & MODAL DIALOG BACKDROP                              -->
+  <!-- ==================================================================== -->
+  <div class="md3-backdrop" id="palette-backdrop">
+    <div class="md3-dialog">
+      <div class="palette-search-box">
+        <span data-icon="search"></span>
+        <input type="text" class="palette-input" id="palette-input" placeholder="Run a command or search files...">
+        <span class="kbd-badge">ESC</span>
+      </div>
+      <div class="palette-list" id="palette-list"></div>
+    </div>
+  </div>
+
+  <!-- Snackbar Notification Container -->
+  <div class="md3-snackbar-container" id="snackbar-container"></div>
+
+  <!-- Scripts: Offline Monaco Loader + openide Modules -->
+  <script src="../../node_modules/monaco-editor/min/vs/loader.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/md3-color-engine.js"></script>
+  <script src="js/editor-manager.js"></script>
+  <script src="js/plugin-host.js"></script>
+  <script src="js/customization-ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

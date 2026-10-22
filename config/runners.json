@@ -1,0 +1,95 @@
+{
+  "_comment": "openide - Language Runner Profiles (Variables: ${file}, ${fileDir}, ${fileName}, ${fileBaseName}, ${workspaceFolder})",
+  "runners": {
+    ".py": {
+      "name": "Python",
+      "icon": "terminal",
+      "command": "python -u \"${file}\"",
+      "workingDir": "${fileDir}"
+    },
+    ".js": {
+      "name": "Node.js",
+      "icon": "javascript",
+      "command": "node \"${file}\"",
+      "workingDir": "${fileDir}"
+    },
+    ".mjs": {
+      "name": "Node.js (ESM)",
+      "icon": "javascript",
+      "command": "node \"${file}\"",
+      "workingDir": "${fileDir}"
+    },
+    ".ts": {
+      "name": "TypeScript (npx tsx)",
+      "icon": "code",
+      "command": "npx --yes tsx \"${file}\"",
+      "workingDir": "${fileDir}"
+    },
+    ".rs": {
+      "name": "Rust (rustc / cargo)",
+      "icon": "memory",
+      "command": "rustc \"${file}\" -o \"${fileDir}\\${fileBaseName}.exe\" && \"${fileDir}\\${fileBaseName}.exe\"",
+      "workingDir": "${fileDir}"
+    },
+    ".c": {
+      "name": "C (GCC)",
+      "icon": "memory",
+      "command": "gcc \"${file}\" -o \"${fileDir}\\${fileBaseName}.exe\" && \"${fileDir}\\${fileBaseName}.exe\"",
+      "workingDir": "${fileDir}"
+    },
+    ".cpp": {
+      "name": "C++ (G++)",
+      "icon": "memory",
+      "command": "g++ \"${file}\" -o \"${fileDir}\\${fileBaseName}.exe\" && \"${fileDir}\\${fileBaseName}.exe\"",
+      "workingDir": "${fileDir}"
+    },
+    ".cs": {
+      "name": "C# (.NET)",
+      "icon": "terminal",
+      "command": "dotnet run",
+      "workingDir": "${fileDir}"
+    },
+    ".go": {
+      "name": "Go",
+      "icon": "Speed",
+      "command": "go run \"${file}\"",
+      "workingDir": "${fileDir}"
+    },
+    ".java": {
+      "name": "Java",
+      "icon": "coffee",
+      "command": "java \"${file}\"",
+      "workingDir": "${fileDir}"
+    },
+    ".ps1": {
+      "name": "PowerShell",
+      "icon": "terminal",
+      "command": "powershell -ExecutionPolicy Bypass -File \"${file}\"",
+      "workingDir": "${fileDir}"
+    },
+    ".bat": {
+      "name": "Windows Batch",
+      "icon": "terminal",
+      "command": "cmd /c \"${file}\"",
+      "workingDir": "${fileDir}"
+    },
+    ".cmd": {
+      "name": "Windows Command",
+      "icon": "terminal",
+      "command": "cmd /c \"${file}\"",
+      "workingDir": "${fileDir}"
+    },
+    ".html": {
+      "name": "HTML Live Preview",
+      "icon": "visibility",
+      "command": "__INTERNAL_PREVIEW__",
+      "workingDir": "${fileDir}"
+    },
+    ".md": {
+      "name": "Markdown Preview",
+      "icon": "article",
+      "command": "__INTERNAL_PREVIEW__",
+      "workingDir": "${fileDir}"
+    }
+  }
+}

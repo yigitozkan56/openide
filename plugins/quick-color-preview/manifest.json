@@ -1,0 +1,9 @@
+{
+  "id": "quick-color-preview",
+  "name": "Material 3 Color & HEX Inspector",
+  "version": "1.0.0",
+  "author": "openide Community",
+  "description": "Detects all HEX (#RRGGBB) colors in the active file and lets you test them as a Material You dynamic theme seed with one click.",
+  "main": "main.js",
+  "icon": "palette"
+}
